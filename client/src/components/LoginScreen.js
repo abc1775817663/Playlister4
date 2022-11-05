@@ -26,13 +26,13 @@ export default function LoginScreen() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        let success = await auth.loginUser(
+        let res = await auth.loginUser(
             formData.get('email'),
             formData.get('password')
         );
 
-        if (!success){
-            store.setErrorMessage("Incorrect email address or password");
+        if (res !== "success"){
+            store.setErrorMessage(res);
         }
 
     };

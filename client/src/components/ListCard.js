@@ -19,6 +19,15 @@ function ListCard(props) {
     const [editActive, setEditActive] = useState(false);
     const [text, setText] = useState("");
     const { idNamePair, selected } = props;
+    const [isHover, setIsHover] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHover(true);
+     };
+     
+     const handleMouseLeave = () => {
+        setIsHover(false);
+     };
 
     function handleLoadList(event, id) {
         console.log("handleLoadList for " + id);
@@ -75,14 +84,18 @@ function ListCard(props) {
     }
     let cardElement =
         <ListItem
+            className="listCard"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             id={idNamePair._id}
             key={idNamePair._id}
             sx={{ marginTop: '15px', display: 'flex', p: 1 }}
-            style={{ width: '100%', fontSize: '48pt' }}
+            style={{ width: '100%', fontSize: '32pt', backgroundColor: isHover? "#474457": "#8e89ad", borderRadius: 50 }}
             button
             onClick={(event) => {
                 handleLoadList(event, idNamePair._id)
-            }}
+            }
+            }
         >
             <Box sx={{ p: 1, flexGrow: 1 }}>{idNamePair.name}</Box>
             <Box sx={{ p: 1 }}>

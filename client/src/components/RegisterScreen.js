@@ -13,22 +13,38 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import MUIErrorModal from './MUIErrorModal';
+import GlobalStoreContext from "../store";
+
 export default function RegisterScreen() {
+    const { store } = useContext(GlobalStoreContext);
     const { auth } = useContext(AuthContext);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        auth.registerUser(
+        let res = await auth.registerUser(
             formData.get('firstName'),
             formData.get('lastName'),
             formData.get('email'),
             formData.get('password'),
             formData.get('passwordVerify')
         );
+        if (res !== "success"){
+            console.log(res);
+            store.setErrorMessage(res);
+        }
+        // log in 
+        else{
+            auth.loginUser(
+                formData.get('email'),
+                formData.get('password')
+            )
+        }
     };
 
     return (
+        <div>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -120,5 +136,8 @@ export default function RegisterScreen() {
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
             </Container>
+            <MUIErrorModal/>
+            </div>
+
     );
 }

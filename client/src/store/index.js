@@ -346,11 +346,14 @@ function GlobalStoreContextProvider(props) {
     }
     store.deleteList = function (id) {
         async function processDelete(id) {
+            console.log("start")
             let response = await api.deletePlaylistById(id);
+            console.log("end", response.data.success)
             if (response.data.success) {
                 store.loadIdNamePairs();
                 history.push("/");
             }
+            // store.loadIdNamePairs();
         }
         processDelete(id);
     }
@@ -388,7 +391,7 @@ function GlobalStoreContextProvider(props) {
     store.isRemoveSongModalOpen = () => {
         return store.currentModal === CurrentModal.REMOVE_SONG;
     }
-    
+
     store.setErrorMessage = (msg) => {
         storeReducer({
             type: GlobalStoreActionType.SET_ERROR_MSG,
