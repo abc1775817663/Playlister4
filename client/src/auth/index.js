@@ -2,6 +2,9 @@ import React, { createContext, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import api from './auth-request-api'
 
+import { useContext } from 'react';
+import GlobalStoreContext from "../store";
+
 const AuthContext = createContext();
 console.log("create AuthContext: " + AuthContext);
 
@@ -83,7 +86,12 @@ function AuthContextProvider(props) {
     }
 
     auth.loginUser = async function(email, password) {
-        const response = await api.loginUser(email, password);
+        const response = await api.loginUser(email, password).catch(
+            (error) => {
+                return false;
+            }
+        );
+
         if (response.status === 200) {
             authReducer({
                 type: AuthActionType.LOGIN_USER,
@@ -92,6 +100,7 @@ function AuthContextProvider(props) {
                 }
             })
             history.push("/");
+            return true;
         }
     }
 

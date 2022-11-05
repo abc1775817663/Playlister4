@@ -24,6 +24,7 @@ import {
 */
 const App = () => {   
     return (
+        
         <BrowserRouter>
             <AuthContextProvider>
                 <GlobalStoreContextProvider>              

@@ -15,30 +15,21 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import MUIErrorModal from './MUIErrorModal';
 
-import GlobalStoreContext from "../store";
-
-export default function LoginScreen() {
-    const { store } = useContext(GlobalStoreContext);
+export default function SignUpScreen() {
     const { auth } = useContext(AuthContext);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        let success = await auth.loginUser(
+        auth.loginUser(
             formData.get('email'),
             formData.get('password')
         );
 
-        if (!success){
-            store.setErrorMessage("Incorrect email address or password");
-        }
-
     };
 
     return (
-        <div>
         <Grid container component="main" sx={{ height: '100vh' }}>
             <CssBaseline />
             <Grid
@@ -69,7 +60,7 @@ export default function LoginScreen() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Sign Up
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         <TextField
@@ -92,36 +83,20 @@ export default function LoginScreen() {
                             id="password"
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
+                        
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
+                            Create Account
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="/register" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
+
                         <Copyright sx={{ mt: 5 }} />
                     </Box>
                 </Box>
             </Grid>
         </Grid>
-        <MUIErrorModal/>
-        </div>
     );
 }
