@@ -79,7 +79,7 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     currentModal : CurrentModal.NONE,
                     idNamePairs: payload.idNamePairs,
-                    currentList: payload.playlist,
+                    currentList: CurrentModal.currentList,
                     currentSongIndex: -1,
                     currentSong: null,
                     newListCounter: store.newListCounter,
@@ -393,6 +393,9 @@ function GlobalStoreContextProvider(props) {
         console.log(store.currentModal === CurrentModal.REMOVE_SONG);
         return store.currentModal === CurrentModal.REMOVE_SONG;
     }
+    store.isModalOpen = () => {
+        return store.isDeleteListModalOpen() || store.isEditSongModalOpen() || store.isRemoveSongModalOpen()
+    }
 
     store.setErrorMessage = (msg) => {
         storeReducer({
@@ -566,6 +569,26 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
+    store.addKeyPress = function() {
+        function KeyPress(store,evtobj) {
+            
+            if (!store.isModalOpen()){
+                
+                if (evtobj.key === "z" && evtobj.ctrlKey){
+                    store.undo();
+                    console.log("undo")
+                }
+                if (evtobj.key === "y" && evtobj.ctrlKey){
+                    store.redo();
+                    console.log("redo")
+                } 
+            }
+        }
+        
+        document.onkeydown = (e) => KeyPress(this,e);
+        
+    }
+    store.addKeyPress()
     return (
         <GlobalStoreContext.Provider value={{
             store

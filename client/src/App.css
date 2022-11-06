@@ -584,3 +584,100 @@ span {
 .modal p + p {
   margin-top: 1rem;
 }
+
+/* ANIMATIONS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+[data-animation] .modal-root {
+  opacity: 0;
+  transition: all 0.5s var(--bounceEasing);
+}
+
+[data-animation].is-visible .modal-root {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+[data-animation="slideInOutDown"] .modal-root {
+  transform: translateY(100%);
+}
+
+[data-animation="slideInOutTop"] .modal-root {
+  transform: translateY(-100%);
+}
+
+[data-animation="slideInOutLeft"] .modal-root {
+  transform: translateX(-100%);
+}
+
+[data-animation="slideInOutRight"] .modal-root {
+  transform: translateX(100%);
+}
+
+[data-animation="zoomInOut"] .modal-root {
+  transform: scale(0.2);
+}
+
+[data-animation="rotateInOutDown"] .modal-root {
+  transform-origin: top left;
+  transform: rotate(-1turn);
+}
+
+[data-animation="mixInAnimations"].is-visible .modal-root {
+  animation: mixInAnimations 2s 0.2s linear forwards;
+}
+
+[data-animation="slideInOutDown"].is-visible .modal-root,
+[data-animation="slideInOutTop"].is-visible .modal-root,
+[data-animation="slideInOutLeft"].is-visible .modal-root,
+[data-animation="slideInOutRight"].is-visible .modal-root,
+[data-animation="zoomInOut"].is-visible .modal-root,
+[data-animation="rotateInOutDown"].is-visible .modal-root {
+  transform: none;
+}
+
+@keyframes mixInAnimations {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  10% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: rotate(20deg);
+  }
+
+  30% {
+    transform: rotate(-20deg);
+  }
+
+  40% {
+    transform: rotate(15deg);
+  }
+
+  50% {
+    transform: rotate(-15deg);
+  }
+
+  60% {
+    transform: rotate(10deg);
+  }
+
+  70% {
+    transform: rotate(-10deg);
+  }
+
+  80% {
+    transform: rotate(5deg);
+  }
+
+  90% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+
+}

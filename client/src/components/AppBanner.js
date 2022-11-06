@@ -90,7 +90,6 @@ export default function AppBanner() {
         else
             return <AccountCircle />;
     }
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -101,7 +100,12 @@ export default function AppBanner() {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}                        
                     >
-                        <Link style={{ textDecoration: 'none', color: 'white' }} to='/'>⌂</Link>
+                        <Link 
+                        onClick={() => store.closeCurrentList()}
+                        style={{ textDecoration: 'none', color: 'white' }}
+                         to='/'>
+                            ⌂
+                            </Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }}>{editToolbar}</Box>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

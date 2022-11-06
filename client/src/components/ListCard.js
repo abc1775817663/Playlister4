@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
+import { useHistory } from 'react-router-dom'
 
 /*
     This is a card in our list of top 5 lists. It lets select
@@ -20,6 +21,7 @@ function ListCard(props) {
     const [text, setText] = useState("");
     const { idNamePair, selected } = props;
     const [isHover, setIsHover] = useState(false);
+    const history = useHistory();
 
     const handleMouseEnter = () => {
         setIsHover(true);
@@ -68,7 +70,9 @@ function ListCard(props) {
             let id = event.target.id.substring("list-".length);
             store.changeListName(id, text);
             toggleEdit();
+
         }
+        // history.pushState("/")
     }
     function handleUpdateText(event) {
         setText(event.target.value);
