@@ -446,3 +446,6 @@ input {
 #list-selector-heading{
   pointer-events: none;
 }
+#add-list-button{
+  pointer-events: auto
+}

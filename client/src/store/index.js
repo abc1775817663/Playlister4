@@ -284,6 +284,7 @@ function GlobalStoreContextProvider(props) {
             type: GlobalStoreActionType.CLOSE_CURRENT_LIST,
             payload: {}
         });
+        history.push("/");
         tps.clearAllTransactions();
     }
 

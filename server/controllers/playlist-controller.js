@@ -63,6 +63,10 @@ deletePlaylist = async (req, res) => {
                 console.log("req.userId: " + req.userId);
                 if (user._id == req.userId) {
                     console.log("correct user!");
+
+                    user.playlists.splice(user.playlists.indexOf(req.params.id,1));
+                    user.save();
+                    
                     Playlist.findOneAndDelete({ _id: req.params.id }, () => {
                         return res.status(200).json({
                             success: true
@@ -184,8 +188,11 @@ updatePlaylist = async (req, res) => {
                 console.log("req.userId: " + req.userId);
                 if (user._id == req.userId) {
                     console.log("correct user!");
-                    console.log("req.body.name: " + req.body.name);
 
+
+
+                    console.log("req.body.name: " + req.body.name);
+    
                     list.name = body.playlist.name;
                     list.songs = body.playlist.songs;
                     list
