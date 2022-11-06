@@ -551,6 +551,11 @@ function GlobalStoreContextProvider(props) {
         return (store.currentList !== null);
     }
 
+    store.unmarkListForDeletion = function() {
+        storeReducer({
+            type: GlobalStoreActionType.HIDE_MODALS
+        })
+    }
     // THIS FUNCTION ENABLES THE PROCESS OF EDITING A LIST NAME
     store.setIsListNameEditActive = function () {
         storeReducer({

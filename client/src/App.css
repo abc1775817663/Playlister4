@@ -443,3 +443,6 @@ input {
   text-align: center;
 }
 
+#list-selector-heading{
+  pointer-events: none;
+}
